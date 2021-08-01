@@ -2,8 +2,8 @@ from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import CanvasGrid, ChartModule
 from mesa.visualization.UserParam import UserSettableParameter
 
-from test_agents import Consumer, Producer, Terrain
-from test_model import EnergyModel
+from agents import Consumer, Producer, Terrain
+from model import EnergyModel
 
 
 def agent_portrayal(agent):
