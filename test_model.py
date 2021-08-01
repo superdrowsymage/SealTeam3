@@ -15,7 +15,7 @@ class RenewableModel(Model):
     height = 20
     width = 20
 
-    initial_producers = 100
+    turbines = 100
     houses = 50
 
     verbose = False  # Print-monitoring
@@ -24,7 +24,7 @@ class RenewableModel(Model):
         "A model for simulating energy."
     )
 
-    def __init__(self, height=20, width=20, turbines=25, houses=15, ):
+    def __init__(self, height=20, width=20, turbines=25, houses=15):
         """
         Create a new model with the given parameters.
 

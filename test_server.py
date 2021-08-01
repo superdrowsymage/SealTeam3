@@ -12,23 +12,7 @@ def agent_portrayal(agent):
 
     portrayal = {}
 
-    if type(agent) is House:
-        portrayal["Shape"] = "resources/house-48.png"
-        # https://icons8.com/icons/set/house
-        portrayal["scale"] = 0.9
-        portrayal["Layer"] = 1
-        portrayal["text"] = agent.energy
-        portrayal["text_color"] = "Red"
-
-    elif type(agent) is Turbine:
-        portrayal["Shape"] = "resources/turbine-64.png"
-        # https://icons8.com/icon/69964/wind-turbine
-        portrayal["scale"] = 0.9 / 4 * 3
-        portrayal["Layer"] = 2
-        portrayal["text"] = agent.energy
-        portrayal["text_color"] = "Green"
-
-    elif type(agent) is Terrain:
+    if type(agent) is Terrain:
         if agent.land:
             portrayal["Color"] = ["#00FF00", "#00CC00", "#009900"]
         else:
@@ -38,6 +22,22 @@ def agent_portrayal(agent):
         portrayal["Layer"] = 0
         portrayal["w"] = 1
         portrayal["h"] = 1
+
+    elif type(agent) is House:
+        portrayal["Shape"] = "resources/house-48.png"
+        # https://icons8.com/icons/set/house
+        portrayal["scale"] = 0.9
+        portrayal["Layer"] = 1
+
+    elif type(agent) is Turbine:
+        portrayal["Shape"] = "resources/turbine-64.png"
+        # https://icons8.com/icon/69964/wind-turbine
+        portrayal["scale"] = 0.9 / 4 * 3
+        portrayal["Layer"] = 2
+
+    portrayal["text"] = agent.pos
+    portrayal["text_color"] = "#000000"
+
 
     return portrayal
 
@@ -61,6 +61,7 @@ model_params = {
 server = ModularServer(
     RenewableModel, [canvas_element, chart_element], "Energy Supply and Demand", model_params
 )
+
 server.port = 8521
 
 server.launch()
