@@ -2,8 +2,8 @@ from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import CanvasGrid, ChartModule
 from mesa.visualization.UserParam import UserSettableParameter
 
-from test_agents import Consumer, Producer, Terrain
-from test_model import EnergyModel
+from test_agents import House, Turbine, Terrain
+from test_model import RenewableModel
 
 
 def agent_portrayal(agent):
@@ -12,19 +12,21 @@ def agent_portrayal(agent):
 
     portrayal = {}
 
-    if type(agent) is Consumer:
+    if type(agent) is House:
         portrayal["Shape"] = "resources/house-48.png"
         # https://icons8.com/icons/set/house
         portrayal["scale"] = 0.9
         portrayal["Layer"] = 1
+        portrayal["text"] = agent.energy
+        portrayal["text_color"] = "Red"
 
-    elif type(agent) is Producer:
+    elif type(agent) is Turbine:
         portrayal["Shape"] = "resources/turbine-64.png"
         # https://icons8.com/icon/69964/wind-turbine
         portrayal["scale"] = 0.9 / 4 * 3
         portrayal["Layer"] = 2
-        portrayal["text"] = round(agent.energy, 1)
-        portrayal["text_color"] = "White"
+        portrayal["text"] = agent.energy
+        portrayal["text_color"] = "Green"
 
     elif type(agent) is Terrain:
         if agent.land:
@@ -40,24 +42,24 @@ def agent_portrayal(agent):
     return portrayal
 
 
-canvas_element = CanvasGrid(agent_portrayal, 20, 20, 500, 500)
+canvas_element = CanvasGrid(agent_portrayal, RenewableModel.width, RenewableModel.height, 600, 600)
 chart_element = ChartModule(
     [{"Label": "Demand", "Color": "#AA0000"}, {"Label": "Supply", "Color": "#666666"}]
 )
 
 model_params = {
-    "initial_producers": UserSettableParameter(
+    "turbines": UserSettableParameter(
         "slider", "Initial Energy Producers", 100, 10, 300
     ),
 
-    "initial_consumers": UserSettableParameter(
-        "slider", "Initial Consumer Population", 50, 10, 300
+    "houses": UserSettableParameter(
+        "slider", "Initial House Population", 50, 10, 300
     ),
 
 }
 
 server = ModularServer(
-    EnergyModel, [canvas_element, chart_element], "Energy Supply and Demand", model_params
+    RenewableModel, [canvas_element, chart_element], "Energy Supply and Demand", model_params
 )
 server.port = 8521
 
