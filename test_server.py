@@ -61,5 +61,4 @@ server = ModularServer(
 )
 server.port = 8521
 
-if __name__ == '__main__':
-    server.launch()
+server.launch()
