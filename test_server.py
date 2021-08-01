@@ -49,11 +49,11 @@ chart_element = ChartModule(
 
 model_params = {
     "turbines": UserSettableParameter(
-        "slider", "Initial Energy Producers", 100, 10, 300
+        "slider", "Initial Energy Producers", 40, 10, 120
     ),
 
     "houses": UserSettableParameter(
-        "slider", "Initial House Population", 50, 10, 300
+        "slider", "Initial House Population", 15, 10, 80
     ),
 
 }
