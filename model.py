@@ -2,8 +2,8 @@ from mesa import Model
 from mesa.space import MultiGrid
 from mesa.datacollection import DataCollector
 
-from test_agents import Producer, Consumer, Terrain
-from test_schedule import RandomActivationByType
+from agents import Producer, Consumer, Terrain
+from schedule import RandomActivationByType
 
 
 class EnergyModel(Model):
